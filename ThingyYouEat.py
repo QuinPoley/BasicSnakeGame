@@ -5,12 +5,16 @@ class ThingyYouEat:
     def __init__(self):
         self.Xcoord = random.randint(1, 50) * 10
         self.Ycoord = random.randint(1, 50) * 10
+        self.isThere = True
 
     def getX(self):
         return self.Xcoords
 
     def getY(self):
         return self.Ycoord
+
+    def check(self):
+        return self.isThere
 
     def __str__(self):
         return(self.Xcoord, self.Ycoord)
