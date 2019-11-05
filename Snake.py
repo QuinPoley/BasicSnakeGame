@@ -10,8 +10,6 @@ class Snake(pyglet.sprite.Sprite):
         self.snakeArray = []
 
     def grow(self):
-        print(self.length)
-        print(self.snakeArray)
         if(self.length == 0):
             if(self.Direction == 1):
                 self.snakeArray.append(Snake(self.image, self.x, self.y-40, self.Direction))
@@ -33,12 +31,7 @@ class Snake(pyglet.sprite.Sprite):
         self.length += 1
 
 
-
-
-
-
     def input(self, symbol):
-        x, y = self.position
         if(symbol == pyglet.window.key.UP):
             self.Direction = 1
         elif(symbol == pyglet.window.key.DOWN):
@@ -48,5 +41,32 @@ class Snake(pyglet.sprite.Sprite):
         elif(symbol == pyglet.window.key.LEFT):
             self.Direction = 4
 
-        for segment in self.snakeArray:
-            segment.input(symbol)
+        for Snake in self.snakeArray:
+            Snake.input(symbol)
+
+    def update(self, dt):
+        if(self.Direction == 1):    # 1 is UP
+            self.y += 20
+        elif(self.Direction == 2):  # 2 is RIGHT
+            self.x += 20
+        elif(self.Direction == 3):  # 3 is DOWN
+            self.y -= 20
+        elif(self.Direction == 4):  # 4 is LEFT
+            self.x -= 20
+
+        i = 0
+        for Snake in self.snakeArray:
+            self.recurse(self.snakeArray[i])
+            i += 1
+
+
+    def recurse(self, snake):
+        x, y = snake.position
+        if(snake.Direction == 1):    # 1 is UP
+            snake.y = y + 20
+        elif(snake.Direction == 2):  # 2 is RIGHT
+            snake.x = x + 20
+        elif(snake.Direction == 3):  # 3 is DOWN
+            snake.y = y - 20
+        elif(snake.Direction == 4):  # 4 is LEFT
+            snake.x = x - 20

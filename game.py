@@ -38,35 +38,6 @@ def on_draw():
 def on_key_press(symbol, modifiers):
     player.input(symbol)
 
-def recurse(snake):
-    x, y = snake.position
-    if(snake.Direction == 1):    # 1 is UP
-        snake.y = y + 20
-    elif(snake.Direction == 2):  # 2 is RIGHT
-        snake.x = x + 20
-    elif(snake.Direction == 3):  # 3 is DOWN
-        snake.y = y - 20
-    elif(snake.Direction == 4):  # 4 is LEFT
-        snake.x = x - 20
-
-# This moves the snake
-def update(dt):
-    x, y = player.position
-    if(player.Direction == 1):    # 1 is UP
-        player.y = y + 20
-    elif(player.Direction == 2):  # 2 is RIGHT
-        player.x = x + 20
-    elif(player.Direction == 3):  # 3 is DOWN
-        player.y = y - 20
-    elif(player.Direction == 4):  # 4 is LEFT
-        player.x = x - 20
-
-        #recursive call to move rest of snake
-    i = 0
-    for Snake in player.snakeArray:
-        recurse(player.snakeArray[i])
-        i += 1
-
 
 # This checks if the snake ate a pellet
 def eating(dt):
@@ -77,7 +48,7 @@ def eating(dt):
             newFoodPellet()
 
 
-clock.schedule_interval(update, 0.4)
+clock.schedule_interval(player.update, 0.4)
 clock.schedule_interval(eating, 0.4)
 if __name__ == '__main__':
     pyglet.app.run()
